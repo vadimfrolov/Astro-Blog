@@ -3,46 +3,207 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getCollection } from 'astro:content';
+
+// Get the 3 most recent blog posts
+const posts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			.hero {
+				padding: 4rem 0 3rem;
+				text-align: center;
+			}
+
+			.hero h1 {
+				font-size: 3rem;
+				font-weight: 800;
+				line-height: 1.2;
+				margin-bottom: 1rem;
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				background-clip: text;
+			}
+
+			.hero .subtitle {
+				font-size: 1.25rem;
+				color: #6b7280;
+				margin-bottom: 2rem;
+				max-width: 600px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			.cta-buttons {
+				display: flex;
+				gap: 1rem;
+				justify-content: center;
+				flex-wrap: wrap;
+				margin-top: 2rem;
+			}
+
+			.btn {
+				padding: 0.75rem 2rem;
+				border-radius: 0.5rem;
+				text-decoration: none;
+				font-weight: 600;
+				transition: all 0.3s ease;
+				display: inline-block;
+			}
+
+			.btn-primary {
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+				color: white;
+			}
+
+			.btn-primary:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+			}
+
+			.btn-secondary {
+				background: transparent;
+				color: #667eea;
+				border: 2px solid #667eea;
+			}
+
+			.btn-secondary:hover {
+				background: #667eea;
+				color: white;
+			}
+
+			.section {
+				padding: 3rem 0;
+			}
+
+			.section-title {
+				font-size: 2rem;
+				font-weight: 700;
+				margin-bottom: 2rem;
+				text-align: center;
+			}
+
+			.posts-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 2rem;
+				margin-top: 2rem;
+			}
+
+			.post-card {
+				background: white;
+				border-radius: 0.75rem;
+				padding: 1.5rem;
+				border: 1px solid #e5e7eb;
+				transition: all 0.3s ease;
+				text-decoration: none;
+				color: inherit;
+				display: block;
+			}
+
+			.post-card:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+				border-color: #667eea;
+			}
+
+			.post-date {
+				color: #9ca3af;
+				font-size: 0.875rem;
+				margin-bottom: 0.5rem;
+			}
+
+			.post-title {
+				font-size: 1.25rem;
+				font-weight: 600;
+				margin-bottom: 0.5rem;
+				color: #1f2937;
+			}
+
+			.post-excerpt {
+				color: #6b7280;
+				line-height: 1.6;
+			}
+
+			.skills {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.75rem;
+				justify-content: center;
+				margin-top: 2rem;
+			}
+
+			.skill-tag {
+				background: #f3f4f6;
+				padding: 0.5rem 1rem;
+				border-radius: 2rem;
+				font-size: 0.875rem;
+				color: #4b5563;
+				border: 1px solid #e5e7eb;
+			}
+
+			.about-section {
+				max-width: 700px;
+				margin: 0 auto;
+				text-align: center;
+				line-height: 1.8;
+				color: #4b5563;
+			}
+
+			@media (max-width: 768px) {
+				.hero h1 {
+					font-size: 2rem;
+				}
+
+				.posts-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<!-- Hero Section -->
+			<section class="hero">
+				<h1>Hi, I'm Vadim 👋</h1>
+				<p class="subtitle">
+					Software developer sharing insights on web development, coding tutorials, and tech discoveries
+				</p>
+				<div class="cta-buttons">
+					<a href={`${import.meta.env.BASE_URL}/blog`} class="btn btn-primary">Read My Blog</a>
+					<a href={`${import.meta.env.BASE_URL}/about`} class="btn btn-secondary">About Me</a>
+				</div>
+			</section>
+
+			<!-- Latest Posts Section -->
+			<section class="section">
+				<h2 class="section-title">Latest Posts</h2>
+				<div class="posts-grid">
+					{posts.map((post) => (
+						<a href={`/blog/${post.slug}/`} class="post-card">
+							<div class="post-date">
+								{new Date(post.data.pubDate).toLocaleDateString('en-us', {
+									year: 'numeric',
+									month: 'short',
+									day: 'numeric'
+								})}
+							</div>
+							<h3 class="post-title">{post.data.title}</h3>
+							<p class="post-excerpt">{post.data.description}</p>
+						</a>
+					))}
+				</div>
+			</section>
+
+	
 		</main>
 		<Footer />
 	</body>
