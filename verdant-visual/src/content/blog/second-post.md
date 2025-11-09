@@ -2,7 +2,7 @@
 title: 'Chrome DevTools MCP: AI Assistants Can Now Debug Your Code'
 description: 'How Chrome DevTools Model Context Protocol is revolutionizing AI-assisted web development'
 pubDate: 'Oct 12 2025'
-heroImage: '../../assets/blog-placeholder-4.jpg'
+heroImage: '../../assets/mcp-chrome.webp'
 ---
 
 AI coding assistants now need less help with Chrome DevTools Model Context Protocol.
