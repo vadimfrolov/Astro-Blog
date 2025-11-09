@@ -1,6 +1,6 @@
 ---
 title: 'Building AI-Powered Planner: My Dual Hackathon Experience'
-description: 'My experience attending two hackathons simultaneously and building a local-first AI planner'
+description: 'My experience of how I attended two hackathons simultaneously, won one, and built a local-first AI planner'
 pubDate: 'Oct 19 2025'
 heroImage: '../../assets/blog-about.webp'
 ---
