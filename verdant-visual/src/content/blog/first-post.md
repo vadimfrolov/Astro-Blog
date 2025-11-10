@@ -21,7 +21,7 @@ What's your experience with local AI models? Have you tried building anything si
 
 ## Links:
 - [OpenAI Open Model Hackathon](https://devpost.com/software/planner-that-guides-you-to-do-anything?ref_content=user-portfolio&ref_feature=in_progress)
-- [Code with Kiro Hackathon](https://devpost.com/software/smart-planner?ref_content=user-portfolio&ref_feature=in_progress)
+- [Code with Kiro Hackathon 🏆](https://devpost.com/software/smart-planner?ref_content=user-portfolio&ref_feature=in_progress)
 
 ## Project Showreel:
 Check out the demo here: [Project Showreel](https://www.youtube.com/watch?v=GQUy498ttnQ&themeRefresh=1) 😅
