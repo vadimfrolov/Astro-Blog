@@ -5,6 +5,10 @@ pubDate: 'Nov 17 2025'
 heroImage: '../../assets/accessibility-ignore.webp'
 ---
 
+> At 1.85 billion people globally, people with disabilities (PWD) represent more than one in four on the planet— a market larger than China.
+>
+> *Source: [2020 Global Economics of Disability Annual Report](https://www.rod-group.com/wp-content/uploads/2023/09/2020-Annual-Report-The-Global-Economics-of-Disability-V2-The-Return-on-Disability-Group.pdf).*
+
 ## References
 
 - [The Internet is Unavailable - Nucleus Research](https://cdn2.hubspot.net/hubfs/153358/Nucleus-The%20Internet%20is%20unavailable.pdf) - Research on the $6.9 billion loss from inaccessible e-commerce
