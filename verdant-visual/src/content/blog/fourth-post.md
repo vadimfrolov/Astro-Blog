@@ -73,7 +73,7 @@ While the risks of ignoring accessibility are clear, the benefits of embracing i
 
 ### Expanded Customer Base
 
-With [1 in 4 adults in the United States living with a disability](https://www.cdc.gov/ncbddd/disabilityandhealth/infographic-disability-impacts-all.html), accessible design opens your products and services to a significantly larger audience. Research shows that [71% of web users with disabilities will simply leave an inaccessible website](https://digital.gov/2017/05/09/benefits-of-accessible-design/)—that's potential customers walking away from your business.
+With [1 in 4 adults in the United States living with a disability](https://www.cdc.gov/disability-and-health/articles-documents/disability-impacts-all-of-us-infographic.html?CDC_AAref_Val=https://www.cdc.gov/ncbddd/disabilityandhealth/infographic-disability-impacts-all.html), accessible design opens your products and services to a significantly larger audience. Research shows that [71% of web users with disabilities will simply leave an inaccessible website](https://digital.gov/2017/05/09/benefits-of-accessible-design/)—that's potential customers walking away from your business.
 
 ### Better Usability for Everyone
 
