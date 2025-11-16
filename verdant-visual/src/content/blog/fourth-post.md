@@ -29,6 +29,9 @@ heroImage: '../../assets/accessibility-ignore.webp'
   - [Prioritizing Aesthetics Over Accessibility](#prioritizing-aesthetics-over-accessibility)
   - [The Cost Excuse](#the-cost-excuse)
 - [Real Benefits of Accessibility](#real-benefits-of-accessibility)
+  - [Expanded Customer Base](#expanded-customer-base)
+  - [Better Usability for Everyone](#better-usability-for-everyone)
+  - [Improved SEO](#improved-seo)
 - [Consequences of Ignoring Accessibility](#consequences-of-ignoring-accessibility)
 - [Conclusion](#conclusion)
 - [References](#references)
@@ -89,7 +92,7 @@ With [1 in 4 adults in the United States living with a disability](https://www.c
 - **Descriptive link text** helps all users understand where links will take them
 - **Alternative text for charts** makes data easier to understand and share
 
-### Improved SEO and Machine Learning
+### Improved SEO
 
 Accessibility standards enhance content portability across devices and improve the quality of machine learning models. Well-structured, accessible content is easier for search engines to index, potentially boosting your search rankings.
 
