@@ -7,11 +7,11 @@ heroImage: '../../assets/accessibility-ignore.webp'
 
 > At 1.85 billion people globally, people with disabilities (PWD) represent more than one in four on the planet— a market larger than China.
 >
-> *Source: [2020 Global Economics of Disability Annual Report](https://www.rod-group.com/wp-content/uploads/2023/09/2020-Annual-Report-The-Global-Economics-of-Disability-V2-The-Return-on-Disability-Group.pdf).*
+> *Source: [2020 Global Economics of Disability Annual Report (pdf)](https://www.rod-group.com/wp-content/uploads/2023/09/2020-Annual-Report-The-Global-Economics-of-Disability-V2-The-Return-on-Disability-Group.pdf).*
 
 ## References
 
-- [The Internet is Unavailable - Nucleus Research](https://cdn2.hubspot.net/hubfs/153358/Nucleus-The%20Internet%20is%20unavailable.pdf) - Research on the $6.9 billion loss from inaccessible e-commerce
+- [The Internet is Unavailable - Nucleus Research (pdf)](https://cdn2.hubspot.net/hubfs/153358/Nucleus-The%20Internet%20is%20unavailable.pdf) - Research on the $6.9 billion loss from inaccessible e-commerce
 - [Accessibility: It's About People - W3C WAI](https://www.w3.org/WAI/people/) - Web Accessibility Initiative's perspective on human-centered accessibility
 - [Practical Reasons for Digital Accessibility - Section508.gov](https://www.section508.gov/manage/benefits-of-accessibility/) - U.S. government guidance on accessibility benefits and consequences
 - [European Accessibility Act](https://ec.europa.eu/social/main.jsp?catId=1202) - EU legislation requiring digital accessibility by June 2025
