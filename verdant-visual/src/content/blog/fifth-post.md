@@ -1,6 +1,6 @@
 ---
-title: 'AI: The New Operating System of Society'
-description: 'Exploring how AI has evolved from a technological tool to a fundamental societal, economic, and cultural operating system that is reshaping our world.'
+title: 'Hybrid intelligence: The New Operating System of Society'
+description: 'Exploring how LLM and agents evolved from a technological tool to a fundamental societal, economic, and cultural operating system that is reshaping our world.'
 pubDate: 'Nov 26 2025'
 heroImage: '../../assets/fifth-post.webp'
 ---
