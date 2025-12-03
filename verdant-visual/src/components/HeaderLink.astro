@@ -4,9 +4,7 @@ import type { HTMLAttributes } from 'astro/types';
 type Props = HTMLAttributes<'a'>;
 
 const { href, class: className, ...props } = Astro.props;
-const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
-const subpath = pathname.match(/[^\/]+/g);
-const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
+const isActive = href === Astro.url.pathname;
 ---
 
 <a href={href} class:list={[className, { active: isActive }]} {...props}>
@@ -16,9 +14,52 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 	a {
 		display: inline-block;
 		text-decoration: none;
+		transition: color 0.2s ease, text-decoration 0.2s ease, outline 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+		border-radius: 4px;
+		padding: 4px 8px;
+		margin: -4px -8px;
+		border: 2px solid transparent;
 	}
+	
+	a:hover {
+		text-decoration: underline;
+		opacity: 1;
+		background-color: #e3f2fd;
+		border-color: #90caf9;
+		box-shadow: 0 1px 4px 0 rgba(25, 118, 210, 0.10);
+		color: #1565c0;
+	}
+	
+	a:focus {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+	
+	a:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+	
+	a:focus:not(:focus-visible) {
+		outline: none;
+	}
+	
 	a.active {
 		font-weight: bolder;
+		font-size: 1.15em;
 		text-decoration: underline;
+		border: 3px solid #1976d2;
+		border-radius: 8px;
+		background-color: #fffde7;
+		box-shadow: 0 2px 8px 0 rgba(25, 118, 210, 0.12);
+		color: #f57c00;
+		position: relative;
+		z-index: 1;
+	}
+
+    a.active:focus, a.active:focus-visible {
+	border-color: #0d47a1;
+	background-color: #bbdefb;
+	box-shadow: 0 0 0 3px #90caf9, 0 2px 8px 0 rgba(25, 118, 210, 0.12);
 	}
 </style>
