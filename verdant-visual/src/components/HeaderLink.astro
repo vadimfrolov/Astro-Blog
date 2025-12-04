@@ -14,20 +14,16 @@ const isActive = href === Astro.url.pathname;
 	a {
 		display: inline-block;
 		text-decoration: none;
-		transition: color 0.2s ease, text-decoration 0.2s ease, outline 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-		border-radius: 4px;
+		transition: color 0.2s ease, text-decoration 0.2s ease, outline 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+		/* border-radius: 4px; */
 		padding: 4px 8px;
 		margin: -4px -8px;
-		border: 2px solid transparent;
 	}
 	
 	a:hover {
 		text-decoration: underline;
-		opacity: 1;
-		background-color: #e3f2fd;
-		border-color: #90caf9;
-		box-shadow: 0 1px 4px 0 rgba(25, 118, 210, 0.10);
-		color: #1565c0;
+		text-decoration-thickness: 3px;
+		text-underline-offset: 4px;
 	}
 	
 	a:focus {
@@ -48,8 +44,7 @@ const isActive = href === Astro.url.pathname;
 		font-weight: bolder;
 		font-size: 1.15em;
 		text-decoration: underline;
-		border: 3px solid #1976d2;
-		border-radius: 8px;
+		/* border-radius: 8px; */
 		background-color: #fffde7;
 		box-shadow: 0 2px 8px 0 rgba(25, 118, 210, 0.12);
 		color: #f57c00;
@@ -58,7 +53,6 @@ const isActive = href === Astro.url.pathname;
 	}
 
     a.active:focus, a.active:focus-visible {
-	border-color: #0d47a1;
 	background-color: #bbdefb;
 	box-shadow: 0 0 0 3px #90caf9, 0 2px 8px 0 rgba(25, 118, 210, 0.12);
 	}

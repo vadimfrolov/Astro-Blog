@@ -73,38 +73,33 @@ import HeaderLink from './HeaderLink.astro';
 	nav a {
 		padding: 1em 0.5em;
 		color: #111;
-		border-bottom: 2px solid transparent;
 		text-decoration: none;
 		background: none;
 		font-weight: 500;
 		font-size: 1em;
-		transition: color 0.2s, border-color 0.2s, font-weight 0.2s, font-size 0.2s;
+		transition: color 0.2s, font-weight 0.2s, font-size 0.2s;
 		position: relative;
 	}
 	nav a:hover {
-		color: #000;
-		border-bottom: 2px solid #000;
 		text-decoration: underline;
+		text-decoration-thickness: 3px;
+		text-underline-offset: 4px;
 	}
 	nav a:focus {
-		outline: 2px solid #000;
-		outline-offset: 2px;
+		/* outline: 2px solid #000; */
+		/* outline-offset: 2px; */
 		z-index: 2;
 	}
 	nav a.active {
 		color: #000;
-		border-bottom: 3px solid #000;
 		font-size: 1.12em;
 		font-weight: 700;
 		text-decoration: underline;
 		background: none;
-		border-radius: 0;
 		box-shadow: none;
 		letter-spacing: 0.01em;
 	}
-	nav a.active:focus {
-		outline: 2px solid #000;
-	}
+
 	.internal-links {
 		display: flex;
 		align-items: center;
