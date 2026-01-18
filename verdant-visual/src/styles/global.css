@@ -82,6 +82,13 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
+	/* Remove browser defaults */
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
 }
 main {
 	width: 720px;
@@ -338,6 +345,32 @@ html {
 	scroll-padding-top: 2rem;
 }
 
+/* Remove unwanted selection styling */
+header {
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+}
+
+header a,
+header a * {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+}
+
+/* Remove any browser default selection boxes */
+::selection {
+	background: var(--accent);
+	color: white;
+}
+
+::-moz-selection {
+	background: var(--accent);
+	color: white;
+}
+
 /* Loading skeleton animation */
 .skeleton {
 	background: linear-gradient(90deg, 
@@ -375,10 +408,60 @@ html {
 	}
 }
 
-/* Enhanced focus styles */
-*:focus {
+/* Enhanced focus styles - but exclude header nav */
+*:focus:not(header a):not(header a *) {
 	outline: 2px solid var(--accent);
 	outline-offset: 2px;
+}
+
+/* Specific header focus handling */
+header a:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+	border-radius: 8px;
+}
+
+/* Remove browser default selection highlights */
+::-webkit-search-decoration,
+::-webkit-search-cancel-button,
+::-webkit-search-results-button,
+::-webkit-search-results-decoration {
+	display: none;
+}
+
+/* Remove any text selection highlights in header */
+header *::selection {
+	background: transparent;
+}
+
+header *::-moz-selection {
+	background: transparent;
+}
+
+/* Remove any browser default focus rings that might appear as ovals */
+header a,
+header a:focus,
+header a:hover,
+header a:active,
+header a:focus-visible {
+	outline: none !important;
+	border: none !important;
+	box-shadow: none !important;
+}
+
+/* Only show focus when user explicitly wants it */
+header a:focus-visible {
+	outline: 2px solid var(--accent) !important;
+	outline-offset: 3px !important;
+	border-radius: 8px !important;
+}
+
+/* Remove any selection in header */
+header {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 /* Reduce motion for users who prefer it */

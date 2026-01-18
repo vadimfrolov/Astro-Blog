@@ -64,6 +64,24 @@ import HeaderLink from './HeaderLink.astro';
 	h2 a,
 	h2 a.active {
 		text-decoration: none;
+		position: relative;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		display: inline-block;
+		background: linear-gradient(135deg, #111 0%, var(--accent) 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		background-size: 200% 200%;
+	}
+
+	h2 a:hover {
+		transform: scale(1.05);
+		background-position: 100% 0;
+		filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.3));
+	}
+
+	h2 a:active {
+		transform: scale(1.02);
 	}
 	nav {
 		display: flex;
@@ -77,54 +95,101 @@ import HeaderLink from './HeaderLink.astro';
 		background: none;
 		font-weight: 500;
 		font-size: 1em;
-		transition: all var(--transition-fast);
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		position: relative;
-		border-radius: 4px;
+		border-radius: 8px;
 		transform-origin: center;
+		overflow: hidden;
+		z-index: 1;
 	}
 
+	/* Animated underline with gradient */
 	nav a::before {
 		content: '';
 		position: absolute;
-		bottom: 0;
+		bottom: 2px;
 		left: 50%;
 		width: 0;
 		height: 3px;
-		background: var(--accent);
-		transition: all var(--transition-base);
+		background: linear-gradient(90deg, var(--accent), #764ba2);
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 		transform: translateX(-50%);
 		border-radius: 2px;
+		z-index: -1;
+	}
+
+	/* Background glow effect */
+	nav a::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 0;
+		height: 0;
+		background: radial-gradient(circle, rgba(102, 126, 234, 0.15), transparent);
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		transform: translate(-50%, -50%);
+		/* border-radius: 50%; */
+		z-index: -1;
 	}
 
 	nav a:hover {
 		color: var(--accent);
-		transform: translateY(-2px);
+		transform: translateY(-3px) scale(1.05);
+		text-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 	}
 
 	nav a:hover::before {
-		width: 80%;
+		width: 85%;
+		height: 4px;
+		bottom: 3px;
+	}
+
+	nav a:hover::after {
+		width: 120%;
+		height: 200%;
+		opacity: 1;
 	}
 
 	nav a:active {
-		transform: translateY(-1px);
+		transform: translateY(-1px) scale(1.02);
+		transition: all 0.15s ease;
 	}
 	nav a:focus {
-		/* outline: 2px solid #000; */
-		/* outline-offset: 2px; */
+		outline: none;
+		transform: translateY(-3px) scale(1.02);
+		box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
 		z-index: 2;
 	}
+
+	nav a:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 3px;
+		border-radius: 8px;
+	}
+
 	nav a.active {
 		color: var(--accent);
 		font-size: 1.12em;
 		font-weight: 700;
-		background: none;
-		box-shadow: none;
+		background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.05));
+		box-shadow: 0 2px 12px rgba(102, 126, 234, 0.2);
 		letter-spacing: 0.01em;
+		position: relative;
+		overflow: visible;
 	}
 
 	nav a.active::before {
-		width: 80%;
-		background: var(--accent);
+		width: 85%;
+		height: 4px;
+		background: linear-gradient(90deg, var(--accent), #764ba2);
+		bottom: 3px;
+	}
+
+	nav a.active::after {
+		width: 100%;
+		height: 150%;
+		opacity: 0.8;
 	}
 
 	.internal-links {
@@ -140,26 +205,127 @@ import HeaderLink from './HeaderLink.astro';
 	}
 
 	.social-links a {
-		padding: 0.5rem;
+		padding: 0.75rem;
 		color: #666;
-		transition: all var(--transition-fast);
+		transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 		border-radius: 50%;
 		background: transparent;
 		transform-origin: center;
+		position: relative;
+		overflow: hidden;
+	}
+
+	/* Ripple effect for social icons */
+	.social-links a::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 0;
+		height: 0;
+		background: radial-gradient(circle, rgba(102, 126, 234, 0.2), transparent);
+		transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+		transform: translate(-50%, -50%);
+		border-radius: 50%;
+		z-index: -1;
+	}
+
+	/* Icon glow effect */
+	.social-links a::after {
+		content: '';
+		position: absolute;
+		inset: -2px;
+		border-radius: 50%;
+		background: linear-gradient(45deg, var(--accent), #764ba2, var(--accent));
+		z-index: -1;
+		opacity: 0;
+		transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+		background-size: 200% 200%;
+		animation: gradientShift 3s ease infinite;
 	}
 
 	.social-links a:hover {
 		color: var(--accent);
-		background: rgba(102, 126, 234, 0.1);
-		transform: scale(1.1) rotate(5deg);
+		background: rgba(102, 126, 234, 0.15);
+		transform: scale(1.15) rotate(8deg);
+		box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+		filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.2));
+	}
+
+	.social-links a:hover::before {
+		width: 150%;
+		height: 150%;
+		opacity: 1;
+	}
+
+	.social-links a:hover::after {
+		opacity: 0.6;
 	}
 
 	.social-links a:active {
-		transform: scale(1.05) rotate(2deg);
+		transform: scale(1.08) rotate(4deg);
+		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 	}
+
+	/* Different hover effects for different social platforms */
+	.social-links a:first-child:hover {
+		transform: scale(1.15) rotate(-8deg);
+		background: rgba(23, 95, 220, 0.15);
+		color: #175fdc;
+	}
+
+	.social-links a:last-child:hover {
+		transform: scale(1.15) rotate(8deg);
+		background: rgba(29, 161, 242, 0.15);
+		color: #1da1f2;
+	}
+	@keyframes gradientShift {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+
+	/* Header entrance animation */
+	header {
+		animation: slideDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+
+	@keyframes slideDown {
+		from {
+			transform: translateY(-100%);
+			opacity: 0;
+		}
+		to {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+
+	/* Subtle header shadow on scroll */
+	header.scrolled {
+		box-shadow: 0 8px 32px rgba(var(--black), 8%);
+		backdrop-filter: blur(10px);
+		background: rgba(255, 255, 255, 0.95);
+	}
+
 	@media (max-width: 720px) {
 		.social-links {
 			display: none;
+		}
+
+		/* Mobile optimized hover effects */
+		nav a:hover {
+			transform: translateY(-2px) scale(1.02);
+		}
+
+		.social-links a:hover {
+			transform: scale(1.1);
 		}
 	}
 </style>

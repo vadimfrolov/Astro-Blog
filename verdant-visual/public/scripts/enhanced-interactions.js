@@ -1,5 +1,34 @@
 // Enhanced scroll behaviors and loading states
 document.addEventListener('DOMContentLoaded', () => {
+	// Enhanced header scroll effects
+	const header = document.querySelector('header');
+	if (header) {
+		let lastScrollY = window.scrollY;
+		let ticking = false;
+
+		const updateHeader = () => {
+			const scrollY = window.scrollY;
+			
+			if (scrollY > 50) {
+				header.classList.add('scrolled');
+			} else {
+				header.classList.remove('scrolled');
+			}
+			
+			lastScrollY = scrollY;
+			ticking = false;
+		};
+
+		const onScroll = () => {
+			if (!ticking) {
+				window.requestAnimationFrame(updateHeader);
+				ticking = true;
+			}
+		};
+
+		window.addEventListener('scroll', onScroll, { passive: true });
+	}
+
 	// Smooth scroll with easing for anchor links
 	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 		anchor.addEventListener('click', function (e) {
