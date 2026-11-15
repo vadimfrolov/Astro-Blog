@@ -1,15 +1,17 @@
 ---
-import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import BaseHead from "../../components/BaseHead.astro";
 import Footer from "../../components/Footer.astro";
-import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
+import PostList from "../../components/PostList.astro";
 import { SITE_TITLE } from "../../consts";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+// Group posts by year, newest first
+const years = Map.groupBy(posts, (post) => post.data.pubDate.getFullYear());
 ---
 
 <!doctype html>
@@ -27,177 +29,37 @@ const posts = (await getCollection("blog")).sort(
         <h1>Blog</h1>
         <p>Articles on AI, web development, and accessibility.</p>
       </header>
-      <ul class="posts">
-        {
-          posts.map((post, index) => (
-            <li class:list={{ featured: index === 0 }}>
-              <a class="card" href={`${import.meta.env.BASE_URL}/blog/${post.id}/`}>
-                {post.data.heroImage && (
-                  <div class="card-media">
-                    <Image
-                      width={index === 0 ? 960 : 720}
-                      height={index === 0 ? 600 : 360}
-                      src={post.data.heroImage}
-                      alt=""
-                      loading={index === 0 ? "eager" : "lazy"}
-                      transition:name={`blog-hero-${post.id}`}
-                    />
-                  </div>
-                )}
-                <div class="card-body">
-                  <p class="card-date">
-                    <FormattedDate date={post.data.pubDate} />
-                  </p>
-                  <h2 class="card-title" transition:name={`blog-title-${post.id}`}>
-                    {post.data.title}
-                  </h2>
-                  <p class="card-excerpt">{post.data.description}</p>
-                </div>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      {
+        [...years].map(([year, yearPosts]) => (
+          <section class="year" aria-labelledby={`year-${year}`}>
+            <h2 id={`year-${year}`} class="label">
+              {year}
+            </h2>
+            <PostList posts={yearPosts} withYear={false} />
+          </section>
+        ))
+      }
     </main>
     <Footer />
   </body>
 </html>
 
 <style>
-  main {
-    width: 1000px;
-  }
-
   .page-header {
-    max-width: 40rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3.5rem;
   }
   .page-header h1 {
     margin-bottom: 0.5rem;
-    font-size: var(--font-size-4xl);
   }
   .page-header p {
     margin: 0;
-    color: rgb(var(--gray));
-    font-size: var(--font-size-lg);
+    color: var(--muted);
   }
-
-  .posts {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  .year + .year {
+    margin-top: 3rem;
   }
-  .featured {
-    grid-column: 1 / -1;
-  }
-
-  .card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    background: var(--surface);
-    color: inherit;
-    transition:
-      transform var(--transition-base),
-      box-shadow var(--transition-base),
-      border-color var(--transition-base);
-  }
-  .card:hover {
-    border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
-    color: inherit;
-    box-shadow: var(--shadow-md);
-    transform: translateY(-3px);
-  }
-
-  .card-media {
-    overflow: hidden;
-    aspect-ratio: 2 / 1;
-    background: rgb(var(--gray-light));
-  }
-  .card-media img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 0;
-    transition: transform var(--transition-slow);
-  }
-  .card:hover .card-media img {
-    transform: scale(1.03);
-  }
-
-  .card-body {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    padding: 1.25rem 1.5rem 1.5rem;
-  }
-  .card-date {
-    margin: 0 0 0.5rem;
-    color: rgb(var(--gray));
-    font-size: var(--font-size-xs);
-    font-weight: 700;
-    letter-spacing: var(--letter-spacing-wider);
-    text-transform: uppercase;
-  }
-  .card-title {
-    margin: 0 0 0.5rem;
-    font-size: var(--font-size-xl);
-    line-height: var(--line-height-snug);
-    transition: color var(--transition-fast);
-  }
-  .card:hover .card-title {
-    color: var(--accent);
-  }
-  .card-excerpt {
-    display: -webkit-box;
-    margin: 0;
-    overflow: hidden;
-    color: rgb(var(--gray));
-    font-size: var(--font-size-sm);
-    line-height: var(--line-height-normal);
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-  }
-
-  @media (min-width: 861px) {
-    .featured .card {
-      display: grid;
-      grid-template-columns: 1.35fr 1fr;
-    }
-    .featured .card-media {
-      aspect-ratio: auto;
-      min-height: 100%;
-    }
-    .featured .card-body {
-      justify-content: center;
-      padding: 2rem 2.25rem;
-    }
-    .featured .card-title {
-      font-size: var(--font-size-3xl);
-      line-height: var(--line-height-tight);
-    }
-    .featured .card-excerpt {
-      font-size: var(--font-size-base);
-      -webkit-line-clamp: 4;
-      line-clamp: 4;
-    }
-  }
-
-  @media (max-width: 720px) {
-    .posts {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-    .page-header {
-      margin-bottom: 1.75rem;
-    }
+  .year .label {
+    margin-bottom: 0.75rem;
+    font-variant-numeric: tabular-nums;
   }
 </style>

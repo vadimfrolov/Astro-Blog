@@ -24,28 +24,22 @@ const isActive =
 
 <style>
 	a {
-		display: inline-flex;
-		align-items: center;
-		padding: 0.45rem 0.85rem;
-		border-radius: 999px;
-		color: rgb(var(--gray-dark));
+		position: relative;
+		color: var(--muted);
 		font-size: 0.9375rem;
-		line-height: 1.25;
-		white-space: nowrap;
 	}
-	a:hover {
-		color: rgb(var(--black));
-		background-color: rgba(var(--gray-light), 0.8);
-	}
+	a:hover,
 	a.active {
-		color: var(--accent);
-		background-color: var(--accent-soft);
-		font-weight: 700;
+		color: var(--fg);
 	}
-
-	@media (max-width: 720px) {
-		a {
-			padding: 0.45rem 0.7rem;
-		}
+	a.active::after {
+		content: '';
+		position: absolute;
+		left: 50%;
+		bottom: -0.5rem;
+		width: 4px;
+		height: 4px;
+		background: var(--accent);
+		transform: translateX(-50%);
 	}
 </style>

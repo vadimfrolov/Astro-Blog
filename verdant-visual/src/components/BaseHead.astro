@@ -5,7 +5,6 @@ import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
 import FallbackImage from '../assets/about-me.webp';
-import { SITE_TITLE } from '../consts';
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
@@ -28,12 +27,6 @@ const socialImageURL = new URL(socialImage.src, Astro.site);
 <meta name="theme-color" content="#ffffff" />
 <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
 <link rel="sitemap" href={`${import.meta.env.BASE_URL}/sitemap-index.xml`} />
-<link
-	rel="alternate"
-	type="application/rss+xml"
-	title={SITE_TITLE}
-	href={`${import.meta.env.BASE_URL}/rss.xml`}
-/>
 <meta name="generator" content={Astro.generator} />
 
 <!-- Self-hosted Atkinson font -->

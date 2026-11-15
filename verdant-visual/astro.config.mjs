@@ -11,6 +11,11 @@ export default defineConfig({
 	integrations: [mdx(), sitemap()],
 	// Keep HTML-aware whitespace handling (Astro 7 defaults to 'jsx')
 	compressHTML: true,
+	markdown: {
+		shikiConfig: {
+			theme: 'github-light',
+		},
+	},
 	experimental: {
 		// Better developer experience with content collections
 		contentIntellisense: true,

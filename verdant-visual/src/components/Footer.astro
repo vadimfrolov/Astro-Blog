@@ -1,51 +1,48 @@
 ---
-import { SITE_TITLE } from '../consts';
-import SocialLinks from './SocialLinks.astro';
-
 const today = new Date();
 ---
 
 <footer class="site-footer">
-	<div class="footer-inner">
-		<div class="footer-text">
-			<p class="footer-title">{SITE_TITLE}</p>
-			<p class="copyright">&copy; {today.getFullYear()} Vadim Frolov. All rights reserved.</p>
-		</div>
-		<SocialLinks />
+	<div class="inner">
+		<p>&copy; {today.getFullYear()} Vadim Frolov</p>
+		<nav aria-label="Social">
+			<a href="https://www.linkedin.com/in/vadimfrolovconcrete/" target="_blank" rel="noopener noreferrer">
+				LinkedIn <span class="arrow arrow-ne" aria-hidden="true">↗</span>
+			</a>
+			<a href="https://x.com/viceversa_de" target="_blank" rel="noopener noreferrer">
+				X <span class="arrow arrow-ne" aria-hidden="true">↗</span>
+			</a>
+		</nav>
 	</div>
 </footer>
 
 <style>
-	.site-footer {
-		margin-top: 2rem;
-		border-top: 1px solid var(--border);
-		background: var(--surface-muted);
-	}
-	.footer-inner {
+	.inner {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		justify-content: space-between;
-		gap: 1rem;
-		max-width: 1080px;
+		gap: 0.75rem 1.5rem;
+		max-width: calc(var(--column) + 2 * var(--gutter));
 		margin: 0 auto;
-		padding: 2rem 1.5rem 2.5rem;
+		padding: 0 var(--gutter) 3rem;
+		color: var(--muted);
+		font-size: 0.875rem;
 	}
-	.footer-text p {
+	.inner::before {
+		content: '';
+		flex-basis: 100%;
+		margin-bottom: 1.25rem;
+		border-top: 1px solid var(--line);
+	}
+	p {
 		margin: 0;
 	}
-	.footer-title {
-		color: rgb(var(--black));
-		font-weight: 700;
+	nav {
+		display: flex;
+		gap: 1.25rem;
 	}
-	.copyright {
-		color: rgb(var(--gray));
-		font-size: var(--font-size-sm);
-	}
-
-	@media (max-width: 600px) {
-		.footer-inner {
-			flex-direction: column;
-			text-align: center;
-		}
+	a:hover {
+		color: var(--fg);
 	}
 </style>

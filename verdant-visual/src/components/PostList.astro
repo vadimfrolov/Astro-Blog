@@ -1,0 +1,98 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+	posts: CollectionEntry<'blog'>[];
+	withYear?: boolean;
+}
+
+const { posts, withYear = true } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<ul class="post-list">
+	{
+		posts.map((post) => (
+			<li class="post-row">
+				<a href={`${base}/blog/${post.id}/`}>
+					<span class="post-title" transition:name={`blog-title-${post.id}`}>
+						{post.data.title}
+					</span>
+					<span class="post-date">
+						<FormattedDate date={post.data.pubDate} withYear={withYear} />
+					</span>
+				</a>
+				{post.data.heroImage && (
+					<Image
+						class="post-preview"
+						src={post.data.heroImage}
+						width={400}
+						height={250}
+						alt=""
+						loading="lazy"
+						aria-hidden="true"
+					/>
+				)}
+			</li>
+		))
+	}
+</ul>
+
+<style>
+	.post-list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		border-top: 1px solid var(--line);
+	}
+	.post-row {
+		position: relative;
+		border-bottom: 1px solid var(--line);
+	}
+	.post-row a {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 1.5rem;
+		padding: 0.875rem 0;
+		color: var(--fg);
+	}
+	.post-date {
+		flex: none;
+		color: var(--muted);
+		font-size: 0.875rem;
+		font-variant-numeric: tabular-nums;
+	}
+
+	/* Focus the hovered row by quietly dimming its siblings */
+	.post-list:has(a:hover) a:not(:hover),
+	.post-list:has(a:focus-visible) a:not(:focus-visible) {
+		opacity: 0.4;
+	}
+
+	.post-preview {
+		display: none;
+	}
+	@media (min-width: 1240px) and (hover: hover) {
+		.post-preview {
+			display: block;
+			position: absolute;
+			top: 50%;
+			left: calc(100% + 2.5rem);
+			width: 200px;
+			pointer-events: none;
+			opacity: 0;
+			transform: translate(-6px, -50%) scale(0.97);
+			transition:
+				opacity 0.25s var(--ease),
+				transform 0.4s var(--ease);
+		}
+		.post-row:hover .post-preview,
+		.post-row:focus-within .post-preview {
+			opacity: 1;
+			transform: translate(0, -50%);
+		}
+	}
+</style>

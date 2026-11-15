@@ -6,7 +6,7 @@
 - ✅ Fixed top progress indicator
 - ✅ Smooth scroll-based animations
 - ✅ Throttled for performance
-- ✅ Modern gradient design with glow effects
+- ✅ Thin accent line that stays out of the way
 - ✅ Shows reading progress on blog posts
 
 ### 2. **Experimental Features Enabled** ⚡
@@ -14,23 +14,19 @@
 experimental: {
   contentIntellisense: true,      // Better VS Code experience
   chromeDevtoolsWorkspace: true,  // Live editing in Chrome
-  preserveScriptOrder: true,      // Better script loading
-  headingIdCompat: true,          // GitHub-compatible heading IDs
 }
 ```
 - ✅ Enhanced developer experience
 - ✅ Better VS Code integration
 - ✅ Live editing capabilities in Chrome DevTools
-- ✅ Improved script loading order
-- ✅ GitHub-compatible heading IDs
+- ✅ Script order and GitHub-compatible heading IDs are default behavior since Astro 7
 
 ## 🎨 **Existing Features (Already Working)**
 
 ### 3. **View Transitions** 
 - ✅ Smooth page transitions between routes
-- ✅ Animated navigation with fade and slide effects
-- ✅ Persistent header and footer during navigation
-- ✅ Matching hero images and titles for seamless transitions
+- ✅ Animated navigation with fade effects
+- ✅ Post titles morph from the post list into the article heading
 
 ### 4. **Enhanced Navigation**
 - ✅ Active page highlighting in header
@@ -61,9 +57,15 @@ experimental: {
 - A/B testing
 
 ### **Advanced Integrations**
-- RSS feeds (already configured)
 - Sitemap generation (already configured)
 - MDX support (already configured)
+
+## 🧭 **Minimal Design Details**
+- ✅ Monochrome palette with one accent taken from the About banner
+- ✅ Post lists dim the other rows on hover and preview the cover image in the margin on wide screens
+- ✅ Section headings show a `#` anchor on hover
+- ✅ Code blocks get a copy button
+- ✅ Posts show reading time and link to the newer and older post
 
 ## 📱 **Mobile Experience**
 - ✅ Responsive design across all components
