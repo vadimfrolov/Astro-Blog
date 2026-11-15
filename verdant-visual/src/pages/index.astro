@@ -1,9 +1,14 @@
 ---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Avatar from '../assets/avatar.webp';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL;
 
 // Get the 3 most recent blog posts
 const posts = (await getCollection('blog'))
@@ -15,288 +20,345 @@ const posts = (await getCollection('blog'))
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			.hero {
-				padding: 4rem 0 3rem;
-				text-align: center;
-			}
-
-			.hero h1 {
-				font-size: var(--font-size-5xl);
-				font-weight: 800;
-				line-height: var(--line-height-tight);
-				margin-bottom: 1rem;
-				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
-				background-clip: text;
-				animation: fadeInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-				opacity: 0;
-				animation-fill-mode: forwards;
-			}
-
-			.hero .subtitle {
-				font-size: var(--font-size-xl);
-				color: rgb(var(--gray-dark));
-				margin-bottom: 2rem;
-				max-width: 600px;
-				margin-left: auto;
-				margin-right: auto;
-				animation: fadeInUp 0.6s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-				opacity: 0;
-				animation-fill-mode: forwards;
-			}
-
-			.cta-buttons {
-				display: flex;
-				gap: 1rem;
-				justify-content: center;
-				flex-wrap: wrap;
-				margin-top: 2rem;
-				animation: fadeInUp 0.6s 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-				opacity: 0;
-				animation-fill-mode: forwards;
-			}
-
-			@keyframes fadeInUp {
-				from {
-					opacity: 0;
-					transform: translateY(30px);
-				}
-				to {
-					opacity: 1;
-					transform: translateY(0);
-				}
-			}
-
-
-
-			.btn {
-				padding: 0.75rem 2rem;
-				border-radius: 0.5rem;
-				text-decoration: none;
-				font-weight: 600;
-				transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-				display: inline-block;
-				position: relative;
-				overflow: hidden;
-				transform-origin: center;
-			}
-
-			.btn::before {
-				content: '';
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				width: 0;
-				height: 0;
-				border-radius: 50%;
-				background: rgba(255, 255, 255, 0.3);
-				transform: translate(-50%, -50%);
-				transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-			}
-
-			.btn:hover::before {
-				width: 300px;
-				height: 300px;
-			}
-
-			.btn-primary {
-				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-				color: white;
-				border: none;
-			}
-
-			.btn-primary:hover {
-				transform: translateY(-3px) scale(1.05);
-				box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
-			}
-
-			.btn-primary:active {
-				transform: translateY(-1px) scale(1.02);
-			}
-
-			.btn-secondary {
-				background: transparent;
-				color: #667eea;
-				border: 2px solid #667eea;
-			}
-
-			.btn-secondary:hover {
-				background: #667eea;
-				color: white;
-				transform: translateY(-3px) scale(1.05);
-				box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
-			}
-
-			.btn-secondary:active {
-				transform: translateY(-1px) scale(1.02);
-			}
-
-			.section {
-				padding: 3rem 0;
-			}
-
-			.section-title {
-				font-size: var(--font-size-3xl);
-				font-weight: 700;
-				margin-bottom: 2rem;
-				text-align: center;
-				color: rgb(var(--black));
-			}
-
-			.posts-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-				gap: 2rem;
-				margin-top: 2rem;
-			}
-
-			.post-card {
-				background: white;
-				border-radius: 0.75rem;
-				padding: 1.5rem;
-				border: 1px solid #e5e7eb;
-				transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-				text-decoration: none;
-				color: inherit;
-				display: block;
-				position: relative;
-				overflow: hidden;
-				transform-origin: center;
-			}
-
-			.post-card::before {
-				content: '';
-				position: absolute;
-				top: 0;
-				left: -100%;
-				width: 100%;
-				height: 100%;
-				background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
-				transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-			}
-
-			.post-card:hover::before {
-				left: 100%;
-			}
-
-			.post-card:hover {
-				transform: translateY(-8px) scale(1.02);
-				box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
-				border-color: #667eea;
-			}
-
-			.post-card:active {
-				transform: translateY(-4px) scale(1.01);
-				transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-			}
-
-			.post-date {
-				color: rgb(var(--gray));
-				font-size: var(--font-size-sm);
-				margin-bottom: 0.5rem;
-				font-weight: 500;
-			}
-
-			.post-title {
-				font-size: var(--font-size-lg);
-				font-weight: 600;
-				margin-bottom: 0.5rem;
-				color: rgb(var(--black));
-				line-height: var(--line-height-snug);
-			}
-
-			.post-excerpt {
-				color: rgb(var(--gray));
-				line-height: var(--line-height-relaxed);
-				font-size: var(--font-size-sm);
-			}
-
-			.skills {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.75rem;
-				justify-content: center;
-				margin-top: 2rem;
-			}
-
-			.skill-tag {
-				background: #f3f4f6;
-				padding: 0.5rem 1rem;
-				border-radius: 2rem;
-				font-size: 0.875rem;
-				color: #4b5563;
-				border: 1px solid #e5e7eb;
-			}
-
-			.about-section {
-				max-width: 700px;
-				margin: 0 auto;
-				text-align: center;
-				line-height: 1.8;
-				color: #4b5563;
-			}
-
-			@media (max-width: 768px) {
-				.hero h1 {
-					font-size: var(--font-size-4xl);
-				}
-
-				.posts-grid {
-					grid-template-columns: 1fr;
-				}
-			}
-
-			@keyframes fadeInUp {
-				from {
-					opacity: 0;
-					transform: translateY(30px);
-				}
-				to {
-					opacity: 1;
-					transform: translateY(0);
-				}
-			}
-		</style>
 	</head>
 	<body>
 		<Header />
-		<main transition:animate="fade">
-			<!-- Hero Section -->
+		<main id="main" transition:animate="fade">
 			<section class="hero">
-				<h1>Hi, I'm Vadim 👋</h1>
+				<Image
+					class="hero-avatar"
+					src={Avatar}
+					width={112}
+					height={112}
+					densities={[1, 2]}
+					alt="Portrait of Vadim Frolov"
+					loading="eager"
+				/>
+				<h1>
+					<span class="gradient-text">Hi, I'm Vadim</span>
+					<span class="wave" aria-hidden="true">👋</span>
+				</h1>
 				<p class="subtitle">
 					I'm a software developer based in <b>Berlin</b>, Germany with my wife and dog. I write this blog and share insights on web development, coding tips, and anything I find important to talk about.
 				</p>
 				<div class="cta-buttons">
-					<a href={`${import.meta.env.BASE_URL}/blog`} class="btn btn-primary">Read My Blog</a>
-					<a href={`${import.meta.env.BASE_URL}/about`} class="btn btn-secondary">About Me</a>
+					<a href={`${base}/blog`} class="btn btn-primary">
+						Read My Blog
+						<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+							<path fill="currentColor" d="M10.3 3.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 0 1-1.4-1.4l4.29-4.3H3a1 1 0 1 1 0-2h11.59l-4.3-4.3a1 1 0 0 1 0-1.4Z"></path>
+						</svg>
+					</a>
+					<a href={`${base}/about`} class="btn btn-secondary">About Me</a>
 				</div>
 			</section>
 
-			<!-- Latest Posts Section -->
-			<section class="section">
-				<h2 class="section-title">Latest Posts</h2>
-				<div class="posts-grid">
-					{posts.map((post) => (
-						<a href={`${import.meta.env.BASE_URL}/blog/${post.id}/`} class="post-card" transition:animate="slide">
-							<div class="post-date">
-								{new Date(post.data.pubDate).toLocaleDateString('en-us', {
-									year: 'numeric',
-									month: 'short',
-									day: 'numeric'
-								})}
-							</div>
-							<h3 class="post-title" transition:name={`blog-title-${post.id}`}>{post.data.title}</h3>
-							<p class="post-excerpt">{post.data.description}</p>
-						</a>
-					))}
+			<section class="latest" aria-labelledby="latest-title">
+				<div class="section-header">
+					<h2 id="latest-title">Latest Posts</h2>
+					<a class="view-all" href={`${base}/blog`}>All posts <span aria-hidden="true">→</span></a>
 				</div>
+				<ul class="post-list">
+					{
+						posts.map((post, index) => (
+							<li style={`--i: ${index}`}>
+								<a href={`${base}/blog/${post.id}/`} class="post-card">
+									{post.data.heroImage && (
+										<div class="post-thumb">
+											<Image
+												src={post.data.heroImage}
+												width={480}
+												height={300}
+												alt=""
+												loading={index === 0 ? 'eager' : 'lazy'}
+												transition:name={`blog-hero-${post.id}`}
+											/>
+										</div>
+									)}
+									<div class="post-body">
+										<p class="post-date">
+											<FormattedDate date={post.data.pubDate} />
+										</p>
+										<h3 class="post-title" transition:name={`blog-title-${post.id}`}>
+											{post.data.title}
+										</h3>
+										<p class="post-excerpt">{post.data.description}</p>
+									</div>
+								</a>
+							</li>
+						))
+					}
+				</ul>
 			</section>
-
-
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.hero {
+		padding: 2.5rem 0 3.5rem;
+		text-align: center;
+	}
+	.hero > * {
+		animation: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+	.hero > :nth-child(2) {
+		animation-delay: 0.08s;
+	}
+	.hero > :nth-child(3) {
+		animation-delay: 0.16s;
+	}
+	.hero > :nth-child(4) {
+		animation-delay: 0.24s;
+	}
+
+	.hero-avatar {
+		display: block;
+		width: 112px;
+		height: 112px;
+		margin: 0 auto 1.75rem;
+		border-radius: 50%;
+		box-shadow:
+			0 0 0 4px #fff,
+			0 0 0 5px rgba(var(--gray-light), 1),
+			var(--shadow-md);
+	}
+
+	.hero h1 {
+		margin-bottom: 1.25rem;
+		font-size: var(--font-size-5xl);
+		line-height: 1.1;
+	}
+	.gradient-text {
+		background: var(--accent-gradient);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+	@media (forced-colors: active) {
+		.gradient-text {
+			background: none;
+			color: CanvasText;
+		}
+	}
+	.wave {
+		display: inline-block;
+		transform-origin: 70% 70%;
+		animation: wave 2.2s ease-in-out 0.9s 1;
+	}
+
+	.subtitle {
+		max-width: 36rem;
+		margin: 0 auto 2.25rem;
+		color: rgb(var(--gray-dark));
+		font-size: var(--font-size-lg);
+		line-height: var(--line-height-relaxed);
+	}
+	.subtitle b {
+		color: rgb(var(--black));
+	}
+
+	.cta-buttons {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.75rem;
+	}
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.8rem 1.5rem;
+		border-radius: 999px;
+		font-weight: 700;
+		line-height: 1.2;
+		transition:
+			transform var(--transition-base),
+			box-shadow var(--transition-base),
+			background-color var(--transition-base),
+			border-color var(--transition-base),
+			color var(--transition-base);
+	}
+	.btn svg {
+		transition: transform var(--transition-base);
+	}
+	.btn-primary {
+		background: var(--accent);
+		color: #fff;
+		box-shadow: 0 6px 20px -8px rgba(79, 70, 229, 0.7);
+	}
+	.btn-primary:hover {
+		background: var(--accent-dark);
+		color: #fff;
+		transform: translateY(-1px);
+		box-shadow: 0 10px 24px -8px rgba(79, 70, 229, 0.75);
+	}
+	.btn-primary:hover svg {
+		transform: translateX(3px);
+	}
+	.btn-secondary {
+		border: 1px solid rgba(var(--gray), 0.35);
+		background: var(--surface);
+		color: rgb(var(--black));
+	}
+	.btn-secondary:hover {
+		border-color: rgb(var(--black));
+		color: rgb(var(--black));
+		transform: translateY(-1px);
+	}
+
+	.latest {
+		padding-top: 1rem;
+	}
+	.section-header {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 1.5rem;
+	}
+	.section-header h2 {
+		margin: 0;
+		font-size: var(--font-size-2xl);
+	}
+	.view-all {
+		font-weight: 700;
+		white-space: nowrap;
+	}
+	.view-all span {
+		display: inline-block;
+		transition: transform var(--transition-fast);
+	}
+	.view-all:hover span {
+		transform: translateX(3px);
+	}
+
+	.post-list {
+		display: grid;
+		gap: 1.25rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.post-list li {
+		animation: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+		animation-delay: calc(0.3s + var(--i) * 0.08s);
+	}
+
+	.post-card {
+		display: grid;
+		grid-template-columns: 200px 1fr;
+		align-items: center;
+		gap: 1.5rem;
+		padding: 1rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		background: var(--surface);
+		color: inherit;
+		transition:
+			transform var(--transition-base),
+			box-shadow var(--transition-base),
+			border-color var(--transition-base);
+	}
+	.post-card:hover {
+		border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+		color: inherit;
+		box-shadow: var(--shadow-md);
+		transform: translateY(-2px);
+	}
+	.post-thumb {
+		overflow: hidden;
+		border-radius: var(--radius);
+		aspect-ratio: 8 / 5;
+		background: rgb(var(--gray-light));
+	}
+	.post-thumb img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 0;
+		transition: transform var(--transition-slow);
+	}
+	.post-card:hover .post-thumb img {
+		transform: scale(1.04);
+	}
+	.post-body {
+		min-width: 0;
+	}
+	.post-date {
+		margin: 0 0 0.375rem;
+		color: rgb(var(--gray));
+		font-size: var(--font-size-xs);
+		font-weight: 700;
+		letter-spacing: var(--letter-spacing-wider);
+		text-transform: uppercase;
+	}
+	.post-title {
+		margin: 0 0 0.5rem;
+		font-size: var(--font-size-lg);
+		line-height: var(--line-height-snug);
+		transition: color var(--transition-fast);
+	}
+	.post-card:hover .post-title {
+		color: var(--accent);
+	}
+	.post-excerpt {
+		display: -webkit-box;
+		margin: 0;
+		overflow: hidden;
+		color: rgb(var(--gray));
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-normal);
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+	}
+
+	@keyframes fade-up {
+		from {
+			opacity: 0;
+			transform: translateY(16px);
+		}
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
+	@keyframes wave {
+		0%,
+		60%,
+		100% {
+			transform: rotate(0deg);
+		}
+		10%,
+		30% {
+			transform: rotate(14deg);
+		}
+		20% {
+			transform: rotate(-8deg);
+		}
+		40% {
+			transform: rotate(-4deg);
+		}
+		50% {
+			transform: rotate(10deg);
+		}
+	}
+
+	@media (max-width: 600px) {
+		.hero {
+			padding: 1.5rem 0 2.5rem;
+		}
+		.hero h1 {
+			font-size: var(--font-size-4xl);
+		}
+		.post-card {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+		.post-thumb {
+			aspect-ratio: 2 / 1;
+		}
+	}
+</style>

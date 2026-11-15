@@ -4,64 +4,48 @@ import type { HTMLAttributes } from 'astro/types';
 type Props = HTMLAttributes<'a'>;
 
 const { href, class: className, ...props } = Astro.props;
-const isActive = href === Astro.url.pathname;
+
+const normalize = (path: string) => path.replace(/\/+$/, '') || '/';
+const home = normalize(import.meta.env.BASE_URL);
+const target = normalize(String(href));
+const current = normalize(Astro.url.pathname);
+const isActive =
+	target === home ? current === home : current === target || current.startsWith(`${target}/`);
 ---
 
-<a href={href} class:list={[className, { active: isActive }]} {...props}>
+<a
+	href={href}
+	class:list={[className, { active: isActive }]}
+	aria-current={isActive ? 'page' : undefined}
+	{...props}
+>
 	<slot />
 </a>
+
 <style>
 	a {
-		display: inline-block;
-		text-decoration: none;
-		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-		padding: 1em 0.5em;
-		position: relative;
-		border-radius: 8px;
-		transform-origin: center;
-		overflow: hidden;
-		z-index: 1;
-		/* Remove unwanted selection styling */
-		-webkit-tap-highlight-color: transparent;
-		-webkit-touch-callout: none;
-		-webkit-user-select: none;
-		user-select: none;
-		outline: none;
+		display: inline-flex;
+		align-items: center;
+		padding: 0.45rem 0.85rem;
+		border-radius: 999px;
+		color: rgb(var(--gray-dark));
+		font-size: 0.9375rem;
+		line-height: 1.25;
+		white-space: nowrap;
 	}
-
-	a:focus {
-		outline: none;
-		box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+	a:hover {
+		color: rgb(var(--black));
+		background-color: rgba(var(--gray-light), 0.8);
 	}
-
-	a:focus-visible {
-		outline: 2px solid var(--accent);
-		outline-offset: 3px;
-		border-radius: 8px;
-	}
-
-	a:focus:not(:focus-visible) {
-		outline: none;
-	}
-
-	/* Remove any browser default selection */
-	a::-moz-focus-inner {
-		border: 0;
-		padding: 0;
-	}
-
 	a.active {
-		font-weight: 700;
-		font-size: 1.12em;
-		/* background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.05)); */
-		box-shadow: 0 2px 12px rgba(102, 126, 234, 0.2);
-		letter-spacing: 0.01em;
-		position: relative;
-		overflow: visible;
 		color: var(--accent);
+		background-color: var(--accent-soft);
+		font-weight: 700;
 	}
 
-    a.active:focus, a.active:focus-visible {
-		box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3), 0 2px 12px rgba(102, 126, 234, 0.2);
+	@media (max-width: 720px) {
+		a {
+			padding: 0.45rem 0.7rem;
+		}
 	}
 </style>

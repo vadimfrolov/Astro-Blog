@@ -1,331 +1,139 @@
 ---
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
+import SocialLinks from './SocialLinks.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
-<header transition:persist>
-	<nav>
-		<h2><a href={`${import.meta.env.BASE_URL}/`}>{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href={`${import.meta.env.BASE_URL}/`}>Home</HeaderLink>
-			<HeaderLink href={`${import.meta.env.BASE_URL}/blog`}>Blog</HeaderLink>
-			<HeaderLink href={`${import.meta.env.BASE_URL}/about`}>About</HeaderLink>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+	<nav class="nav" aria-label="Main">
+		<a class="brand" href={`${base}/`}>
+			<svg class="brand-mark" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true">
+				<defs>
+					<linearGradient id="brand-gradient" x1="0" y1="0" x2="1" y2="1">
+						<stop offset="0" stop-color="#4f46e5"></stop>
+						<stop offset="1" stop-color="#7c3aed"></stop>
+					</linearGradient>
+				</defs>
+				<rect width="32" height="32" rx="8" fill="url(#brand-gradient)"></rect>
+				<path d="M8 13h12v4.5a5.5 5.5 0 0 1-5.5 5.5h-1A5.5 5.5 0 0 1 8 17.5V13Z" fill="#fff"></path>
+				<path
+					d="M20 14.5h1.5a2.75 2.75 0 0 1 0 5.5H20M7 25.5h15M12 6c-1 1 1 2 0 3.5M16 6c-1 1 1 2 0 3.5"
+					fill="none"
+					stroke="#fff"
+					stroke-width="1.8"
+					stroke-linecap="round"></path>
+			</svg>
+			<span class="brand-name">{SITE_TITLE}</span>
+		</a>
+		<div class="nav-links">
+			<HeaderLink href={`${base}/`}>Home</HeaderLink>
+			<HeaderLink href={`${base}/blog`}>Blog</HeaderLink>
+			<HeaderLink href={`${base}/about`}>About</HeaderLink>
 		</div>
-		<div class="social-links">
-  <a href="https://www.linkedin.com/in/vadimfrolovconcrete/" target="_blank" rel="noopener noreferrer">
-      <span class="sr-only">Check my Linkedin</span>
-      <svg
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-        width="24"
-        height="24"
-        astro-icon="social/mastodon"
-        style="scale: 1.5;"
-      >
-        <path
-          fill="currentColor"
-          d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-        ></path>
-      </svg>
-    </a>
-			<a href="https://x.com/viceversa_de" target="_blank" rel="noopener noreferrer">
-				<span class="sr-only">Follow Astro on Twitter</span>
-				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
-					><path
-						fill="currentColor"
-						d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
-					></path></svg
-				>
-			</a>
-			<!-- <a href="https://github.com/vadimfrolov" target="_blank">
-				<span class="sr-only">Go to Astro's GitHub repo</span>
-				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
-					><path
-						fill="currentColor"
-						d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-					></path></svg
-				>
-			</a> -->
+		<div class="nav-social">
+			<SocialLinks />
 		</div>
 	</nav>
 </header>
+
+<script>
+	const syncHeader = () => {
+		document.querySelector('.site-header')?.toggleAttribute('data-scrolled', window.scrollY > 8);
+	};
+	window.addEventListener('scroll', syncHeader, { passive: true });
+	document.addEventListener('astro:page-load', syncHeader);
+</script>
+
 <style>
-	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
-
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-		position: relative;
-		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-		display: inline-block;
-		background: linear-gradient(135deg, #111 0%, var(--accent) 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-		background-size: 200% 200%;
-	}
-
-	h2 a:hover {
-		transform: scale(1.05);
-		background-position: 100% 0;
-		filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.3));
-	}
-
-	h2 a:active {
-		transform: scale(1.02);
-	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-	nav a {
-		padding: 1em 0.5em;
-		color: #111;
-		text-decoration: none;
-		background: none;
-		font-weight: 500;
-		font-size: 1em;
-		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-		position: relative;
-		border-radius: 8px;
-		transform-origin: center;
-		overflow: hidden;
-		z-index: 1;
-	}
-
-	/* Animated underline with gradient */
-	nav a::before {
-		content: '';
+	.skip-link {
 		position: absolute;
-		bottom: 2px;
-		left: 50%;
-		width: 0;
-		height: 3px;
-		background: linear-gradient(90deg, var(--accent), #764ba2);
-		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-		transform: translateX(-50%);
-		border-radius: 2px;
-		z-index: -1;
-	}
-
-	/* Background glow effect */
-	nav a::after {
-		content: '';
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		width: 0;
-		height: 0;
-		background: radial-gradient(circle, rgba(102, 126, 234, 0.15), transparent);
-		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-		transform: translate(-50%, -50%);
-		/* border-radius: 50%; */
-		z-index: -1;
-	}
-
-	nav a:hover {
-		color: var(--accent);
-		transform: translateY(-3px) scale(1.05);
-		text-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-	}
-
-	nav a:hover::before {
-		width: 85%;
-		height: 4px;
-		bottom: 3px;
-	}
-
-	nav a:hover::after {
-		width: 120%;
-		height: 200%;
-		opacity: 1;
-	}
-
-	nav a:active {
-		transform: translateY(-1px) scale(1.02);
-		transition: all 0.15s ease;
-	}
-	nav a:focus {
-		outline: none;
-		transform: translateY(-3px) scale(1.02);
-		box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
-		z-index: 2;
-	}
-
-	nav a:focus-visible {
-		outline: 2px solid var(--accent);
-		outline-offset: 3px;
-		border-radius: 8px;
-	}
-
-	nav a.active {
-		color: var(--accent);
-		font-size: 1.12em;
+		top: 0.75rem;
+		left: 0.75rem;
+		z-index: 200;
+		padding: 0.5rem 1rem;
+		border-radius: var(--radius-sm);
+		background: rgb(var(--black));
+		color: #fff;
 		font-weight: 700;
-		background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.05));
-		box-shadow: 0 2px 12px rgba(102, 126, 234, 0.2);
-		letter-spacing: 0.01em;
-		position: relative;
-		overflow: visible;
+		transform: translateY(-200%);
+	}
+	.skip-link:focus {
+		transform: none;
+		color: #fff;
 	}
 
-	nav a.active::before {
-		width: 85%;
-		height: 4px;
-		background: linear-gradient(90deg, var(--accent), #764ba2);
-		bottom: 3px;
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		border-bottom: 1px solid rgba(var(--gray-light), 0.9);
+		background: rgba(255, 255, 255, 0.82);
+		-webkit-backdrop-filter: saturate(180%) blur(12px);
+		backdrop-filter: saturate(180%) blur(12px);
+		transition: box-shadow var(--transition-base);
+	}
+	.site-header[data-scrolled] {
+		box-shadow: 0 6px 24px -16px rgba(var(--black), 0.35);
 	}
 
-	nav a.active::after {
-		width: 100%;
-		height: 150%;
-		opacity: 0.8;
-	}
-
-	.internal-links {
-		display: flex;
+	.nav {
+		display: grid;
+		grid-template-columns: 1fr auto 1fr;
 		align-items: center;
-		gap: 0.5rem;
+		gap: 1rem;
+		max-width: 1080px;
+		height: var(--header-height);
+		margin: 0 auto;
+		padding: 0 1.5rem;
 	}
-	.social-links,
-	.social-links a {
-		display: flex;
+
+	.brand {
+		display: inline-flex;
 		align-items: center;
-		justify-content: center;
+		gap: 0.625rem;
+		justify-self: start;
+		color: rgb(var(--black));
+		font-size: 1.0625rem;
+		font-weight: 700;
+		letter-spacing: -0.01em;
+		white-space: nowrap;
 	}
-
-	.social-links a {
-		padding: 0.75rem;
-		color: #666;
-		transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-		border-radius: 50%;
-		background: transparent;
-		transform-origin: center;
-		position: relative;
-		overflow: hidden;
-	}
-
-	/* Ripple effect for social icons */
-	.social-links a::before {
-		content: '';
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		width: 0;
-		height: 0;
-		background: radial-gradient(circle, rgba(102, 126, 234, 0.2), transparent);
-		transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-		transform: translate(-50%, -50%);
-		border-radius: 50%;
-		z-index: -1;
-	}
-
-	/* Icon glow effect */
-	.social-links a::after {
-		content: '';
-		position: absolute;
-		inset: -2px;
-		border-radius: 50%;
-		background: linear-gradient(45deg, var(--accent), #764ba2, var(--accent));
-		z-index: -1;
-		opacity: 0;
-		transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-		background-size: 200% 200%;
-		animation: gradientShift 3s ease infinite;
-	}
-
-	.social-links a:hover {
+	.brand:hover {
 		color: var(--accent);
-		background: rgba(102, 126, 234, 0.15);
-		transform: scale(1.15) rotate(8deg);
-		box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-		filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.2));
+	}
+	.brand-mark {
+		flex: none;
+		border-radius: 8px;
+		box-shadow: 0 2px 6px -1px rgba(79, 70, 229, 0.45);
 	}
 
-	.social-links a:hover::before {
-		width: 150%;
-		height: 150%;
-		opacity: 1;
+	.nav-links {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
 	}
 
-	.social-links a:hover::after {
-		opacity: 0.6;
-	}
-
-	.social-links a:active {
-		transform: scale(1.08) rotate(4deg);
-		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-	}
-
-	/* Different hover effects for different social platforms */
-	.social-links a:first-child:hover {
-		transform: scale(1.15) rotate(-8deg);
-		background: rgba(23, 95, 220, 0.15);
-		color: #175fdc;
-	}
-
-	.social-links a:last-child:hover {
-		transform: scale(1.15) rotate(8deg);
-		background: rgba(29, 161, 242, 0.15);
-		color: #1da1f2;
-	}
-	@keyframes gradientShift {
-		0% {
-			background-position: 0% 50%;
-		}
-		50% {
-			background-position: 100% 50%;
-		}
-		100% {
-			background-position: 0% 50%;
-		}
-	}
-
-	/* Header entrance animation */
-	header {
-		animation: slideDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-	}
-
-	@keyframes slideDown {
-		from {
-			transform: translateY(-100%);
-			opacity: 0;
-		}
-		to {
-			transform: translateY(0);
-			opacity: 1;
-		}
-	}
-
-	/* Subtle header shadow on scroll */
-	header.scrolled {
-		box-shadow: 0 8px 32px rgba(var(--black), 8%);
-		backdrop-filter: blur(10px);
-		background: rgba(255, 255, 255, 0.95);
+	.nav-social {
+		justify-self: end;
 	}
 
 	@media (max-width: 720px) {
-		.social-links {
+		.nav {
+			display: flex;
+			justify-content: space-between;
+			padding: 0 1rem;
+		}
+		.nav-social {
 			display: none;
 		}
+	}
 
-		/* Mobile optimized hover effects */
-		nav a:hover {
-			transform: translateY(-2px) scale(1.02);
-		}
-
-		.social-links a:hover {
-			transform: scale(1.1);
+	@media (max-width: 389px) {
+		.brand-name {
+			display: none;
 		}
 	}
 </style>

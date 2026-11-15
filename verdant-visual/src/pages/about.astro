@@ -51,14 +51,15 @@ import Layout from '../layouts/BlogPost.astro';
 <style>
 	.about-hero {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		justify-content: space-between;
 		gap: 2rem;
 		min-height: 320px;
 		padding: 3rem clamp(1.5rem, 5vw, 4rem);
-		border-radius: 12px;
-		background: #0b0b0b;
-		box-shadow: var(--box-shadow);
+		border-radius: var(--radius-lg);
+		background: #0d0d0d;
+		box-shadow: var(--shadow-md);
 		color: #f5f5f5;
 		font-family: "Atkinson", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 	}
@@ -73,6 +74,8 @@ import Layout from '../layouts/BlogPost.astro';
 	.about-hero-avatar {
 		flex: 0 1 260px;
 		width: 260px;
+		min-width: 0;
+		max-width: 100%;
 		height: auto;
 	}
 
@@ -98,6 +101,22 @@ import Layout from '../layouts/BlogPost.astro';
 		font-size: clamp(1.125rem, 1rem + 0.8vw, 1.5rem);
 		line-height: 1.4;
 		color: #d4d4d4;
+	}
+
+	@media (max-width: 640px) {
+		.about-hero {
+			justify-content: center;
+			gap: 1.5rem;
+			min-height: 0;
+			padding: 2rem 1.5rem 0;
+		}
+		.about-hero-text {
+			flex-basis: 100%;
+		}
+		.about-hero-avatar {
+			flex-basis: 220px;
+			width: 220px;
+		}
 	}
 </style>
 
