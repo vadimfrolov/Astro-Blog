@@ -24,7 +24,7 @@ jobs:
         uses: withastro/action@v3
         with:
           path: ./verdant-visual
-          # node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
+          node-version: 22 # Astro 6+ requires Node 22.12 or higher; Astro 7 requires 22.23.4 or higher. Defaults to 20 (unsupported).
           # package-manager: npm # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
         # env:
           # PUBLIC_POKEAPI: 'https://pokeapi.co/api/v2' # Use single quotation marks for the variable value. (optional)

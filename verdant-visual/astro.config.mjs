@@ -9,14 +9,12 @@ export default defineConfig({
 	site: 'https://vadimfrolov.github.io',
 	base: '/Astro-Blog',
 	integrations: [mdx(), sitemap()],
+	// Keep HTML-aware whitespace handling (Astro 7 defaults to 'jsx')
+	compressHTML: true,
 	experimental: {
 		// Better developer experience with content collections
 		contentIntellisense: true,
 		// Chrome DevTools workspace integration for live editing
 		chromeDevtoolsWorkspace: true,
-		// Preserve script order for better performance
-		preserveScriptOrder: true,
-		// GitHub-compatible heading IDs
-		headingIdCompat: true,
 	},
 });

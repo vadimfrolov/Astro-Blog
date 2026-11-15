@@ -21,7 +21,7 @@ heroImage: '../../assets/accessibility-ignore.webp'
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [The Chat Paradox](#the-chat-paradox)
+- [The Chat Paradox](#the-chat-paradox-)
 - [$6.9 Billion Question](#69-billion-question)
 - [Common Reasons Companies Ignore Accessibility](#common-reasons-companies-ignore-accessibility)
   - [Unawareness of Benefits](#unawareness-of-benefits)
