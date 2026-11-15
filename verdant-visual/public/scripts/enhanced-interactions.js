@@ -57,15 +57,20 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	});
 
-	// Parallax effect for hero section
+	// Parallax effect for hero section (throttled to one update per frame)
 	const hero = document.querySelector('.hero');
 	if (hero) {
+		let heroTicking = false;
 		window.addEventListener('scroll', () => {
-			const scrolled = window.pageYOffset;
-			const parallax = hero.style;
-			parallax.transform = `translateY(${scrolled * 0.5}px)`;
-			parallax.opacity = 1 - scrolled / 600;
-		});
+			if (heroTicking) return;
+			heroTicking = true;
+			window.requestAnimationFrame(() => {
+				const scrolled = window.pageYOffset;
+				hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+				hero.style.opacity = 1 - scrolled / 600;
+				heroTicking = false;
+			});
+		}, { passive: true });
 	}
 
 	// Intersection Observer for fade-in animations
@@ -94,14 +99,21 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Enhanced reading progress bar
 	const progressBar = document.querySelector('[data-reading-progress]');
 	if (progressBar) {
+		let progressTicking = false;
 		const updateProgress = () => {
 			const windowHeight = window.innerHeight;
 			const documentHeight = document.documentElement.scrollHeight - windowHeight;
-			const scrolled = (window.scrollY / documentHeight) * 100;
+			const scrolled = documentHeight > 0 ? (window.scrollY / documentHeight) * 100 : 0;
 			progressBar.style.width = `${scrolled}%`;
+			progressTicking = false;
 		};
 
-		window.addEventListener('scroll', updateProgress);
+		window.addEventListener('scroll', () => {
+			if (!progressTicking) {
+				progressTicking = true;
+				window.requestAnimationFrame(updateProgress);
+			}
+		}, { passive: true });
 		updateProgress();
 	}
 

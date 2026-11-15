@@ -27,16 +27,11 @@ const { title, description, image = FallbackImage } = Astro.props;
 	rel="alternate"
 	type="application/rss+xml"
 	title={SITE_TITLE}
-	href={new URL('rss.xml', Astro.site)}
+	href={`${import.meta.env.BASE_URL}/rss.xml`}
 />
 <meta name="generator" content={Astro.generator} />
 
-<!-- Enhanced Typography with Variable Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=JetBrains+Mono:wght@300..800&family=Playfair+Display:wght@400..900&display=swap" rel="stylesheet" />
-
-<!-- Fallback to local fonts -->
+<!-- Self-hosted Atkinson font -->
 <link rel="preload" href={`${import.meta.env.BASE_URL}/fonts/atkinson-regular.woff`} as="font" type="font/woff" crossorigin />
 <link rel="preload" href={`${import.meta.env.BASE_URL}/fonts/atkinson-bold.woff`} as="font" type="font/woff" crossorigin />
 
@@ -56,11 +51,11 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="og:image" content={new URL(image.src, Astro.url)} />
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={Astro.url} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={new URL(image.src, Astro.url)} />
 
 <!-- View Transitions -->
 <ClientRouter />
