@@ -119,18 +119,20 @@ const { title, description, pubDate, updatedDate, heroImage, postId } = Astro.pr
     <main transition:animate="fade">
       <article>
         <div class="hero-image">
-          {
-            heroImage && (
-              <Image
-                width={1020}
-                height={510}
-                src={heroImage}
-                alt=""
-                loading="eager"
-                transition:name={postId ? `blog-hero-${postId}` : undefined}
-              />
-            )
-          }
+          <slot name="hero">
+            {
+              heroImage && (
+                <Image
+                  width={1020}
+                  height={510}
+                  src={heroImage}
+                  alt=""
+                  loading="eager"
+                  transition:name={postId ? `blog-hero-${postId}` : undefined}
+                />
+              )
+            }
+          </slot>
         </div>
         <div class="prose">
           <div class="title">
