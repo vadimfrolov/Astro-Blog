@@ -25,15 +25,17 @@ const posts = (await getCollection('blog'))
 		<Header />
 		<main id="main" transition:animate="fade">
 			<section class="intro">
-				<Image
-					class="avatar"
-					src={Avatar}
-					width={64}
-					height={64}
-					densities={[1, 2]}
-					alt="Portrait of Vadim Frolov"
-					loading="eager"
-				/>
+				<div class="avatar-wrap" data-tilt>
+					<Image
+						class="avatar"
+						src={Avatar}
+						width={64}
+						height={64}
+						densities={[1, 2]}
+						alt="Portrait of Vadim Frolov"
+						loading="eager"
+					/>
+				</div>
 				<h1>Hi, I'm Vadim <span class="wave" aria-hidden="true">👋</span></h1>
 				<p class="bio">
 					I'm a software developer living in <b>Berlin</b>, Germany, with my dog. I write this blog and share insights on web development, coding tips, and anything I find important to talk about.
@@ -53,6 +55,31 @@ const posts = (await getCollection('blog'))
 	</body>
 </html>
 
+<script>
+	// The avatar leans toward the pointer; skipped on touch screens and for reduced motion.
+	function initAvatarTilt() {
+		const wrap = document.querySelector<HTMLElement>('[data-tilt]');
+		if (!wrap || wrap.dataset.tiltReady) return;
+		if (!matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) return;
+		wrap.dataset.tiltReady = 'true';
+
+		wrap.addEventListener('pointermove', (event) => {
+			const rect = wrap.getBoundingClientRect();
+			const x = (event.clientX - rect.left) / rect.width - 0.5;
+			const y = (event.clientY - rect.top) / rect.height - 0.5;
+			wrap.style.setProperty('--rx', `${(-y * 24).toFixed(1)}deg`);
+			wrap.style.setProperty('--ry', `${(x * 24).toFixed(1)}deg`);
+			wrap.style.setProperty('--tx', `${(x * 6).toFixed(1)}px`);
+			wrap.style.setProperty('--ty', `${(y * 6).toFixed(1)}px`);
+		});
+		wrap.addEventListener('pointerleave', () => {
+			for (const prop of ['--rx', '--ry', '--tx', '--ty']) wrap.style.removeProperty(prop);
+		});
+	}
+
+	document.addEventListener('astro:page-load', initAvatarTilt);
+</script>
+
 <style>
 	.intro > * {
 		animation: enter 0.7s var(--ease) both;
@@ -67,13 +94,32 @@ const posts = (await getCollection('blog'))
 		animation-delay: 0.18s;
 	}
 
+	.avatar-wrap {
+		width: 64px;
+		height: 64px;
+		margin-bottom: 1.75rem;
+		perspective: 240px;
+	}
 	.avatar {
 		display: block;
 		width: 64px;
 		height: 64px;
-		margin-bottom: 1.75rem;
 		border-radius: 50%;
 		box-shadow: 0 0 0 1px var(--line);
+		transform: translate(var(--tx, 0px), var(--ty, 0px)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+		transition:
+			transform 0.6s var(--ease),
+			box-shadow 0.3s var(--ease);
+	}
+	.avatar-wrap:hover .avatar {
+		box-shadow:
+			0 0 0 3px var(--bg),
+			0 0 0 4.5px var(--accent),
+			0 14px 24px -14px rgb(24 24 27 / 0.5);
+		transform: translate(var(--tx, 0px), var(--ty, 0px)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1.08);
+		transition:
+			transform 0.2s ease-out,
+			box-shadow 0.3s var(--ease);
 	}
 
 	h1 {
@@ -83,7 +129,9 @@ const posts = (await getCollection('blog'))
 		display: inline-block;
 		transform-origin: 70% 70%;
 	}
-	h1:hover .wave {
+	/* Hovering the avatar or the greeting makes the hand wave */
+	h1:hover .wave,
+	.intro:has(.avatar-wrap:hover) .wave {
 		animation: wave 1.2s ease-in-out;
 	}
 
