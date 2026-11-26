@@ -6,16 +6,20 @@ import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
 import FallbackImage from '../assets/about-me.webp';
 import { ClientRouter } from 'astro:transitions';
+import fontRegular from '../assets/fonts/atkinson-hyperlegible-latin-400-normal.woff2?url';
+import fontBold from '../assets/fonts/atkinson-hyperlegible-latin-700-normal.woff2?url';
 
 interface Props {
 	title: string;
 	description: string;
 	image?: ImageMetadata;
+	/** Set on articles to emit og:type=article and its dates */
+	article?: { publishedTime: Date; modifiedTime?: Date };
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = FallbackImage } = Astro.props;
+const { title, description, image = FallbackImage, article } = Astro.props;
 // Social platforms handle JPEG more reliably than WebP for link previews.
 const socialImage = await getImage({ src: image, width: Math.min(image.width, 1200), format: 'jpg' });
 const socialImageURL = new URL(socialImage.src, Astro.site);
@@ -24,14 +28,15 @@ const socialImageURL = new URL(socialImage.src, Astro.site);
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="theme-color" content="#ffffff" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f0f11" />
 <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
 <link rel="sitemap" href={`${import.meta.env.BASE_URL}/sitemap-index.xml`} />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Self-hosted Atkinson font -->
-<link rel="preload" href={`${import.meta.env.BASE_URL}/fonts/atkinson-regular.woff`} as="font" type="font/woff" crossorigin />
-<link rel="preload" href={`${import.meta.env.BASE_URL}/fonts/atkinson-bold.woff`} as="font" type="font/woff" crossorigin />
+<link rel="preload" href={fontRegular} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={fontBold} as="font" type="font/woff2" crossorigin />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -42,7 +47,9 @@ const socialImageURL = new URL(socialImage.src, Astro.site);
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={article ? 'article' : 'website'} />
+{article && <meta property="article:published_time" content={article.publishedTime.toISOString()} />}
+{article?.modifiedTime && <meta property="article:modified_time" content={article.modifiedTime.toISOString()} />}
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
