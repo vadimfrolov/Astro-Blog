@@ -375,9 +375,19 @@ a:focus-visible .arrow-back {
 .prose .copy-button:hover {
 	color: var(--fg);
 }
+/* Plain-text blocks hold prose (prompts, notes), so wrap them instead of hiding text behind a horizontal scroll */
+.prose pre[data-language="plaintext"],
+.prose pre[data-language="plaintext"] > code {
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
 @media (hover: none) {
 	.prose .copy-button {
 		opacity: 1;
+	}
+	/* The copy button is always visible on touch screens; keep wrapped text clear of it */
+	.prose pre[data-language="plaintext"] {
+		padding-right: 4.5rem;
 	}
 }
 @media (max-width: 760px) {
