@@ -9,15 +9,6 @@ heroImage: '../../assets/accessibility-ignore.webp'
 >
 > *Source: [2020 Global Economics of Disability Annual Report (pdf)](https://www.rod-group.com/wp-content/uploads/2023/09/2020-Annual-Report-The-Global-Economics-of-Disability-V2-The-Return-on-Disability-Group.pdf).*
 
-## References
-
-- [The Internet is Unavailable - Nucleus Research (pdf)](https://cdn2.hubspot.net/hubfs/153358/Nucleus-The%20Internet%20is%20unavailable.pdf) - Research on the $6.9 billion loss from inaccessible e-commerce
-- [Accessibility: It's About People - W3C WAI](https://www.w3.org/WAI/people/) - Web Accessibility Initiative's perspective on human-centered accessibility
-- [Practical Reasons for Digital Accessibility - Section508.gov](https://www.section508.gov/manage/benefits-of-accessibility/) - U.S. government guidance on accessibility benefits and consequences
-- [European Accessibility Act](https://ec.europa.eu/social/main.jsp?catId=1202) - EU legislation requiring digital accessibility by June 2025
-- [CDC Disability Statistics](https://www.cdc.gov/disability-and-health/articles-documents/disability-impacts-all-of-us-infographic.html?CDC_AAref_Val=https://www.cdc.gov/ncbddd/disabilityandhealth/infographic-disability-impacts-all.html) - 1 in 4 adults in the U.S. live with a disability
-- [UK Study on Web Accessibility](https://www.med.unc.edu/webguide/accessibility/why-accessibility-matters/) - 71% of users with disabilities leave inaccessible websites
-
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -122,3 +113,12 @@ With the European Accessibility Act coming into force in 2025 and growing awaren
 Companies that recognize accessibility as both a moral obligation and a business opportunity will find themselves better positioned for long-term success.
 
 The question isn't whether you can afford to invest in accessibility—it's whether you can afford not to. 🧐
+
+## References
+
+- [The Internet is Unavailable - Nucleus Research (pdf)](https://cdn2.hubspot.net/hubfs/153358/Nucleus-The%20Internet%20is%20unavailable.pdf) - Research on the $6.9 billion loss from inaccessible e-commerce
+- [Accessibility: It's About People - W3C WAI](https://www.w3.org/WAI/people/) - Web Accessibility Initiative's perspective on human-centered accessibility
+- [Practical Reasons for Digital Accessibility - Section508.gov](https://www.section508.gov/manage/benefits-of-accessibility/) - U.S. government guidance on accessibility benefits and consequences
+- [European Accessibility Act](https://ec.europa.eu/social/main.jsp?catId=1202) - EU legislation requiring digital accessibility by June 2025
+- [CDC Disability Statistics](https://www.cdc.gov/disability-and-health/articles-documents/disability-impacts-all-of-us-infographic.html?CDC_AAref_Val=https://www.cdc.gov/ncbddd/disabilityandhealth/infographic-disability-impacts-all.html) - 1 in 4 adults in the U.S. live with a disability
+- [UK Study on Web Accessibility](https://www.med.unc.edu/webguide/accessibility/why-accessibility-matters/) - 71% of users with disabilities leave inaccessible websites

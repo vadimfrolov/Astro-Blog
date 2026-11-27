@@ -23,7 +23,12 @@ const base = import.meta.env.BASE_URL;
 
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} image={heroImage} />
+    <BaseHead
+      title={title}
+      description={description}
+      image={heroImage}
+      article={{ publishedTime: pubDate, modifiedTime: updatedDate }}
+    />
   </head>
 
   <body>

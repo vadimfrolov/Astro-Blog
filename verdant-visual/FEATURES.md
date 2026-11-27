@@ -37,6 +37,8 @@ experimental: {
 - ✅ Remote image domains configured
 - ✅ WebP format by default
 - ✅ Lazy loading and responsive images
+- ✅ Self-hosted WOFF2 fonts split into latin / latin-ext subsets, hashed for long-term caching
+- ✅ Links are prefetched as they scroll into view
 
 ## 🚀 **Future Enhancements You Could Add**
 
@@ -66,6 +68,7 @@ experimental: {
 - ✅ Section headings show a `#` anchor on hover
 - ✅ Code blocks get a copy button
 - ✅ Posts show reading time and link to the newer and older post
+- ✅ Dark mode follows the system setting, including dark code highlighting
 
 ## 📱 **Mobile Experience**
 - ✅ Responsive design across all components
@@ -75,7 +78,7 @@ experimental: {
 ## 🎯 **SEO & Accessibility**
 - ✅ Proper heading hierarchy for TOC
 - ✅ ARIA labels and semantic HTML
-- ✅ Meta tags and Open Graph support
+- ✅ Meta tags and Open Graph support (posts use og:type article with publish dates)
 - ✅ Fast loading with optimized images
 
 Your blog now has modern, professional features that rival any commercial blogging platform! 🎉

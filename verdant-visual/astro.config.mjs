@@ -9,11 +9,19 @@ export default defineConfig({
 	site: 'https://vadimfrolov.github.io',
 	base: '/Astro-Blog',
 	integrations: [mdx(), sitemap()],
+	// Prefetch links as they scroll into view so navigation feels instant
+	prefetch: {
+		prefetchAll: true,
+		defaultStrategy: 'viewport',
+	},
 	// Keep HTML-aware whitespace handling (Astro 7 defaults to 'jsx')
 	compressHTML: true,
 	markdown: {
 		shikiConfig: {
-			theme: 'github-light',
+			themes: {
+				light: 'github-light',
+				dark: 'github-dark',
+			},
 		},
 	},
 	experimental: {

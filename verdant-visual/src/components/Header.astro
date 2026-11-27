@@ -32,7 +32,7 @@ const base = import.meta.env.BASE_URL;
 		padding: 0.5rem 0.875rem;
 		border-radius: 6px;
 		background: var(--fg);
-		color: #fff;
+		color: var(--bg);
 		font-size: 0.875rem;
 		transform: translateY(-200%);
 	}
@@ -61,6 +61,12 @@ const base = import.meta.env.BASE_URL;
 	.brand-mark {
 		flex: none;
 		border-radius: 5px;
+	}
+	@media (prefers-color-scheme: dark) {
+		/* Keep the dark tile from melting into the dark page */
+		.brand-mark {
+			box-shadow: 0 0 0 1px var(--line-strong);
+		}
 	}
 	.brand-dot {
 		transform-box: fill-box;
